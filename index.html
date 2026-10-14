@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#161124" />
+  <title>Pick &amp; Reveal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="noise"></div>
+  <main class="app-shell">
+    <header><a class="brand" href="./">PICK<span>&amp;</span>REVEAL</a><div id="connectionPill" class="connection-pill">● OFFLINE</div></header>
+
+    <section id="homeScreen" class="screen home-screen">
+      <div class="hero"><p class="eyebrow">THE GROUP CHAT GAME</p><h1>Choose wisely.<br><em>Or don’t.</em></h1><p class="hero-copy">A little chaos for your favorite people. No accounts, no server — just send a link and play.</p></div>
+      <div class="mode-grid">
+        <button class="mode-card clean selected" data-mode="clean"><span class="mode-icon">✦</span><strong>Clean</strong><small>Family-friendly, all fun</small></button>
+        <button class="mode-card spicy" data-mode="spicy"><span class="mode-icon">♥</span><strong>Spicy</strong><small>For friends who can take it</small></button>
+      </div>
+      <div class="home-actions"><button id="hostBtn" class="primary-btn">Create a room <span>→</span></button><button id="joinBtn" class="secondary-btn">Join with a code</button></div>
+    </section>
+
+    <section id="identityScreen" class="screen hidden"><div class="panel identity-panel"><button class="back-btn" data-back="homeScreen">← Back</button><p class="eyebrow">YOU’RE IN</p><h2 id="identityTitle">Create your room</h2><p class="subcopy">Pick a name and how you’d like to be represented.</p><form id="identityForm"><label>YOUR NAME<input id="nameInput" maxlength="16" placeholder="e.g. Maya" required autocomplete="off" /></label><label>YOUR GENDER<span class="label-hint">Used only for relevant questions</span></label><div class="gender-options"><button type="button" data-gender="girl" class="gender-choice girl">♀ Girl</button><button type="button" data-gender="boy" class="gender-choice boy">♂ Boy</button></div><button class="primary-btn wide" type="submit">Continue <span>→</span></button></form></div></section>
+
+    <section id="joinScreen" class="screen hidden"><div class="panel join-panel"><button class="back-btn" data-back="homeScreen">← Back</button><p class="eyebrow">GOT AN INVITE?</p><h2>Join the chaos</h2><p class="subcopy">Ask the host for their six-digit room code.</p><form id="codeForm"><label>ROOM CODE<input id="codeInput" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" placeholder="000000" required /></label><button class="primary-btn wide" type="submit">Find room <span>→</span></button></form></div></section>
+
+    <section id="lobbyScreen" class="screen hidden"><div class="room-top"><div><p class="eyebrow">ROOM CODE</p><button id="copyCode" class="room-code">------ <span>⧉</span></button></div><div id="lobbyMode" class="mode-badge">✦ CLEAN</div></div><div class="lobby-layout"><div><h2 id="lobbyTitle">Waiting for the crew</h2><p id="lobbyMessage" class="subcopy">Share your invite link or room code.</p><div id="inviteBox" class="invite-box hidden"><input id="inviteLink" readonly><button id="copyLink">Copy link</button></div><div id="hostSettings" class="host-settings"><label>ROUNDS <select id="roundSelect"><option value="3">3 rounds</option><option value="5" selected>5 rounds</option><option value="8">8 rounds</option><option value="10">10 rounds</option></select></label></div><button id="startBtn" class="primary-btn wide" disabled>Start game <span>→</span></button></div><aside class="player-panel"><div class="player-panel-title">PLAYERS <span id="playerCount">1</span></div><div id="playerList" class="player-list"></div><div id="requests" class="requests"></div></aside></div></section>
+
+    <section id="gameScreen" class="screen hidden"><div class="game-layout"><section class="game-main"><div class="game-header"><div><p id="roundText" class="eyebrow">ROUND 1 OF 5 · TURN 1 OF 4</p><h2 id="turnTitle">Someone’s up...</h2></div><div id="timerWrap" class="timer-wrap"><svg viewBox="0 0 42 42"><circle class="timer-bg" cx="21" cy="21" r="18"/><circle id="timerRing" class="timer-ring" cx="21" cy="21" r="18"/></svg><b id="timerText">30</b></div></div><div id="questionCard" class="question-card"><p class="question-label">THE QUESTION</p><h3 id="questionText">Getting the next question ready...</h3><div id="answerOptions" class="answer-options"></div><div id="spectatorState" class="spectator-state hidden"></div><div id="coinStage" class="coin-stage hidden"><div id="coin" class="coin"><span id="coinMark">?</span></div><p id="coinLabel">THE COIN IS DECIDING</p></div><div id="outcomeState" class="outcome-state hidden"></div><p id="questionNote" class="question-note"></p></div><div id="phaseStatus" class="phase-status">Waiting for the next round…</div></section><aside class="chat-panel"><div class="chat-header">CHAT <span>LIVE</span></div><div id="chatMessages" class="chat-messages"></div><form id="chatForm" class="chat-form"><input id="chatInput" maxlength="180" placeholder="Say something..." autocomplete="off"><button aria-label="Send">↑</button></form></aside></div></section>
+  </main>
+  <div id="countdownOverlay" class="countdown-overlay hidden"><p>GET READY</p><strong id="countdownNumber">3</strong><span id="countdownName">Maya is up next</span></div>
+  <div id="toast" class="toast"></div>
+  <script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
